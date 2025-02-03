@@ -43,7 +43,7 @@ spec:
       automountServiceAccountToken: {{ .Values.app.automountServiceAccountToken }}
       initContainers:
         {{- if .Values.app.preDbMigrationContainers }}
-          {{- toYaml . | nindent 14 }}
+        {{- toYaml .Values.app.preDbMigrationContainers | nindent 8 }}
         {{- end }}
         - name: db-migrations
           image: "{{ .Values.global.image.registry | default "docker.io" }}/{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
