@@ -42,6 +42,22 @@ spec:
       {{- end }}
       automountServiceAccountToken: {{ .Values.app.automountServiceAccountToken }}
       terminationGracePeriodSeconds: {{ .Values.app.terminationGracePeriodSeconds }}
+      initContainers:
+        - name: cloud-sql-proxy
+          restartPolicy: Always
+          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.1
+          args:
+            - "--private-ip"
+            - "--auto-iam-authn"
+            - "--structured-logs"
+            - "--port=5432"
+            - "substantial-art-401720:us-central1:pageai"
+          securityContext:
+            runAsNonRoot: true
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "1"
       containers:
         - name: app
           image: "{{ .Values.global.image.registry | default "docker.io" }}/{{ .Values.global.image.repository }}:{{ .Values.global.image.tag | default .Chart.AppVersion }}"
