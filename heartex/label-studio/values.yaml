@@ -368,6 +368,8 @@ app:
   # Seconds LS pod needs to terminate gracefully
   terminationGracePeriodSeconds: 30
 
+  preDbMigrationContainers: [ ]
+
   ## Add additional init containers to the App Deployment pod
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
   ## e.g:

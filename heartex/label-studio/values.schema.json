@@ -731,6 +731,9 @@
         "terminationGracePeriodSeconds": {
           "type": "integer"
         },
+        "preDbMigrationContainers": {
+          "type": "array"
+        },
         "initContainers": {
           "type": "array"
         },
